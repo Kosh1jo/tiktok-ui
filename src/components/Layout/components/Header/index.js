@@ -19,12 +19,14 @@ import Tippy from '@tippyjs/react';
 import { Wrapper as PopperWrapper } from '~/components/Poper';
 import Button from '~/components/Button';
 import Menu from '~/components/Poper/Menu';
+import Image from '~/components/Image';
 
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import 'tippy.js/dist/tippy.css';
 import { useEffect, useState } from 'react';
 import AccountItem from '~/components/AccountItem';
+import { SearchIcon, UploadIcon, InboxIcon, MessageIcon } from '~/components/Icons';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -129,7 +131,7 @@ function Header() {
                         <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
 
                         <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
                 </HeadlessTippy>
@@ -138,7 +140,18 @@ function Header() {
                         <>
                             <Tippy delay={[0, 200]} placement="bottom" content="Upload video">
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                    <UploadIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 50]} content="Message" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <InboxIcon />
+                                    <span className={cx('badge')}>12</span>
                                 </button>
                             </Tippy>
                         </>
@@ -151,11 +164,11 @@ function Header() {
 
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
                                 src="https://demoda.vn/wp-content/uploads/2022/04/hinh-cute-anh-cute-777x600.jpg"
                                 alt="Nguyen Anh Tuan"
-                            ></img>
+                            />
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
