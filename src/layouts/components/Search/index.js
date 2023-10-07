@@ -4,7 +4,7 @@ import { Wrapper as PopperWrapper } from '~/components/Poper';
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '~/hooks';
 
-import * as searchServies from '~/apiServices/searchServices';
+import * as searchServies from '~/services/searchService';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import classNames from 'classnames/bind';
