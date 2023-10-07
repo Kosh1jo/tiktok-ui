@@ -4,6 +4,7 @@ import { Wrapper as PopperWrapper } from '~/components/Poper';
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '~/hooks';
 
+import * as searchServies from '~/apiServices/searchServices';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import classNames from 'classnames/bind';
@@ -25,16 +26,23 @@ function Search() {
             setSearchResult([]);
             return;
         }
-        setLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+        const fetchApi = async () => {
+            setLoading(true);
+            const result = await searchServies.search(debounced);
+            setSearchResult(result);
+            setLoading(false);
+        };
+        fetchApi();
+        // setLoading(true);
+        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
+        //     .then((res) => res.json())
+        //     .then((res) => {
+        //         setSearchResult(res.data);
+        //         setLoading(false);
+        //     })
+        //     .catch(() => {
+        //         setLoading(false);
+        //     });
     }, [debounced]);
 
     const handleClear = () => {
