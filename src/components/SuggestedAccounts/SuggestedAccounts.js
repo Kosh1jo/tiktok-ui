@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './SuggestedAccounts.module.scss';
 import AccountItem from './AccountItem';
+import PropTypes from 'prop-types';
 const cx = classNames.bind(styles);
 
 function SuggestedAccounts({ label }) {
@@ -19,5 +20,7 @@ function SuggestedAccounts({ label }) {
         </div>
     );
 }
-
+SuggestedAccounts.propTypes = {
+    label: PropTypes.string.isRequired,
+};
 export default SuggestedAccounts;
